@@ -29,7 +29,7 @@ public class Request
 {
 	protected static String requestUrl = "";
 	protected static String rawResponse = "";
-	protected static String version = "SDK_JAVA_1.0";
+	protected static String version = "SDK_JAVA_1.1";
 	
 	public static String getRequestUrl()
 	{
