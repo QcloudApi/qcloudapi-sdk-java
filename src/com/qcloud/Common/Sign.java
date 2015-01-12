@@ -62,9 +62,6 @@ public class Sign {
 
         String retStr = "";
         for(String key: requestParams.keySet()) {
-            if (key.equals("Signature")) {
-                continue;
-            }
             if (retStr.isEmpty()) {
                 retStr += '?';
             } else {
