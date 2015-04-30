@@ -21,7 +21,7 @@ public class Demo {
 		
 		config.put("SecretId", "你的secretId");
 		config.put("SecretKey", "你的secretKey");
-		config.put("RequestMethod", "POST");
+		config.put("requestMethod", "POST");
 		config.put("DefaultRegion", "gz");
 		QcloudApiModuleCenter module = new QcloudApiModuleCenter(new Cdn(), config);
 		TreeMap<String, Object> params = new TreeMap<String, Object>();
