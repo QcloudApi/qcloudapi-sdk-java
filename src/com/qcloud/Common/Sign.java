@@ -67,7 +67,7 @@ public class Sign {
             } else {
                 retStr += '&';
             }
-            retStr += key + '=' + requestParams.get(key).toString();
+            retStr += key.replace("_", ".") + '=' + requestParams.get(key).toString();
 
         }
 
