@@ -8,7 +8,9 @@ import java.util.TreeMap;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
-import sun.misc.BASE64Encoder;
+//import sun.misc.BASE64Encoder;
+//import org.apache.commons.codec.binary.Base64;
+import com.qcloud.Utilities.Base64;
 
 public class Sign {
 	// 编码方式
@@ -39,7 +41,9 @@ public class Sign {
         byte[] hash = mac.doFinal(signStr.getBytes(CONTENT_CHARSET));
 
         // base64
-        sig = new String(new BASE64Encoder().encode(hash).getBytes());
+        //sig = new String(new BASE64Encoder().encode(hash).getBytes());
+        //sig = new String(Base64.encodeBase64(hash));
+        sig = new String(Base64.encode(hash));
 
         return sig;
     }
@@ -62,7 +66,7 @@ public class Sign {
 
         String retStr = "";
         for(String key: requestParams.keySet()) {
-            if (retStr.isEmpty()) {
+            if (retStr.length()==0) {
                 retStr += '?';
             } else {
                 retStr += '&';
