@@ -304,7 +304,7 @@ public class Request
             	// 定义 BufferedReader输入流来读取URL的响应
             	in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             } catch (Exception e) {
-            	result = "{\"code\":-3002,\"message\":\"request error, please retry (offset=0 and dataSize=512K) to obtain new offset\"}";
+            	result = "{\"code\":-3002,\"message\":\"request error, please retry (offset=0 and dataSize=10K) to obtain new offset\"}";
                 if (in != null) {
                     in.close();
                 }

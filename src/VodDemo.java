@@ -22,7 +22,7 @@ public class VodDemo {
 			String fileSHA1 = SHA1.fileNameToSHA(fileName);
 			
 			int fixDataSize = 1024*1024*50;  //每次上传字节数，可自定义
-			int firstDataSize = 1024*512;    //最小片字节数（默认不变）
+			int firstDataSize = 1024*10;    //最小片字节数（默认不变）
 			int tmpDataSize = firstDataSize;
 			long remainderSize = fileSize;
 			int tmpOffset = 0;
