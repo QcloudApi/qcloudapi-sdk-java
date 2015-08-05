@@ -16,26 +16,38 @@ public abstract class Base {
 		if (config == null)
 			return;
 		for (String key : config.keySet()) {
-			switch (key) {
-			case "SecretId":
+//			switch (key) {
+//			case "SecretId":
+//				setConfigSecretId(config.get(key).toString());
+//				break;
+//
+//			case "SecretKey":
+//				setConfigSecretKey(config.get(key).toString());
+//				break;
+//
+//			case "DefaultRegion":
+//				setConfigDefaultRegion(config.get(key).toString());
+//				break;
+//
+//			case "RequestMethod":
+//				setConfigRequestMethod(config.get(key).toString());
+//				break;
+//
+//			default:
+//				;
+//				break;
+//			}
+			if(key.equals("SecretId")){
 				setConfigSecretId(config.get(key).toString());
-				break;
-
-			case "SecretKey":
+			}
+			if(key.equals("SecretKey")){
 				setConfigSecretKey(config.get(key).toString());
-				break;
-
-			case "DefaultRegion":
+			}
+			if(key.equals("DefaultRegion")){
 				setConfigDefaultRegion(config.get(key).toString());
-				break;
-
-			case "RequestMethod":
+			}
+			if(key.equals("RequestMethod")){
 				setConfigRequestMethod(config.get(key).toString());
-				break;
-
-			default:
-				;
-				break;
 			}
 		}
 	}
