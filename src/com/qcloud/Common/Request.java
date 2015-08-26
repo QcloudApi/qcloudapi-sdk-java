@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
@@ -109,7 +110,6 @@ public class Request {
 		return sendRequest(url, params, requestMethod, fileName);
 	}
 
-	@SuppressWarnings("deprecation")
 	public static String sendRequest(String url,
 			Map<String, Object> requestParams, String requestMethod,
 			String fileName) {
@@ -121,8 +121,13 @@ public class Request {
 			if (!paramStr.isEmpty()) {
 				paramStr += '&';
 			}
-			paramStr += key + '='
-					+ URLEncoder.encode(requestParams.get(key).toString());
+			try {
+				paramStr += key + '='
+						+ URLEncoder.encode(requestParams.get(key).toString(),"utf-8");
+			} catch (UnsupportedEncodingException e) {
+				result = "{\"code\":-2300,\"location\":\"com.qcloud.Common.Request:129\",\"message\":\"api sdk throw exception! "
+						+ e.toString() + "\"}";
+			}
 		}
 
 		try {
@@ -239,7 +244,6 @@ public class Request {
 		return result;
 	}
 
-	@SuppressWarnings("deprecation")
 	public static String sendMultipartUploadVodFileRequest(String url,
 			Map<String, Object> requestParams, String requestMethod,
 			String fileName) {
@@ -251,8 +255,13 @@ public class Request {
 			if (!paramStr.isEmpty()) {
 				paramStr += '&';
 			}
-			paramStr += key + '='
-					+ URLEncoder.encode(requestParams.get(key).toString());
+			try {
+				paramStr += key + '='
+						+ URLEncoder.encode(requestParams.get(key).toString(),"utf-8");
+			} catch (UnsupportedEncodingException e) {
+				result = "{\"code\":-2400,\"location\":\"com.qcloud.Common.Request:263\",\"message\":\"api sdk throw exception! "
+						+ e.toString() + "\"}";
+			}
 		}
 
 		try {
