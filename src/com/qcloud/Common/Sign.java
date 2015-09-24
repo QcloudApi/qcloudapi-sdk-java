@@ -56,7 +56,7 @@ public class Sign {
         retStr += requestHost;
         retStr += requestPath;
         retStr += buildParamStr(requestParams);
-        System.out.println(retStr);
+        
         return retStr;
     }
 
