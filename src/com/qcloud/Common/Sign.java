@@ -11,6 +11,7 @@ import javax.crypto.spec.SecretKeySpec;
 //import sun.misc.BASE64Encoder;
 //import org.apache.commons.codec.binary.Base64;
 import com.qcloud.Utilities.Base64;
+import com.sun.corba.se.impl.protocol.giopmsgheaders.RequestMessage;
 
 public class Sign {
 	// 编码方式
@@ -55,6 +56,7 @@ public class Sign {
         retStr += requestHost;
         retStr += requestPath;
         retStr += buildParamStr(requestParams);
+        System.out.println(retStr);
         return retStr;
     }
 
@@ -66,6 +68,10 @@ public class Sign {
 
         String retStr = "";
         for(String key: requestParams.keySet()) {
+        	//排除上传文件的参数，特殊字符  @
+            if(requestMethod == "GET" && requestParams.get(key).toString().substring(0, 1).equals("@")){
+            	continue;
+            }
             if (retStr.length()==0) {
                 retStr += '?';
             } else {
@@ -74,7 +80,6 @@ public class Sign {
             retStr += key.replace("_", ".") + '=' + requestParams.get(key).toString();
 
         }
-
         return retStr;
     }
 }
