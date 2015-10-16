@@ -40,7 +40,7 @@ public class VodDemo {
 				 */
 				params.put("fileSha", fileSHA1);
 				params.put("fileType", "rmvb");
-				params.put("fileName", "royTest");
+				params.put("fileName", "Test");
 				params.put("fileSize", fileSize);
 				params.put("dataSize", tmpDataSize);
 				params.put("offset", tmpOffset);
