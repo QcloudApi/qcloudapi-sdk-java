@@ -65,13 +65,13 @@ public class Request {
 
 		if (params.get("Action").toString().equals("MultipartUploadVodFile")) {
 			String url = "http://" + requestHost + requestPath;
-			url += Sign.buildParamStr(params);
+			url += Sign.buildParamStr1(params,requestMethod);
 			return url;
 		}
 
 		String url = "https://" + requestHost + requestPath;
 		if (requestMethod.equals("GET")) {
-			url += Sign.buildParamStr(params);
+			url += Sign.buildParamStr1(params,requestMethod);
 		}
 
 		return url;
