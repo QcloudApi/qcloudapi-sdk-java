@@ -55,21 +55,21 @@ public class Sign {
         retStr += requestMethod;
         retStr += requestHost;
         retStr += requestPath;
-        retStr += buildParamStr(requestParams);
+        retStr += buildParamStr1(requestParams, requestMethod);
         
         return retStr;
     }
 
-    protected static String buildParamStr(TreeMap<String, Object> requestParams) {
-        return buildParamStr(requestParams, "GET");
+    protected static String buildParamStr1(TreeMap<String, Object> requestParams, String requestMethod) {
+        return buildParamStr(requestParams, requestMethod);
     }
 
     protected static String buildParamStr(TreeMap<String, Object> requestParams, String requestMethod) {
 
         String retStr = "";
         for(String key: requestParams.keySet()) {
-        	//排除上传文件的参数，特殊字符  @
-            if(requestMethod == "GET" && requestParams.get(key).toString().substring(0, 1).equals("@")){
+        	//排除上传文件的参数
+            if(requestMethod == "POST" && requestParams.get(key).toString().substring(0, 1).equals("@")){
             	continue;
             }
             if (retStr.length()==0) {
