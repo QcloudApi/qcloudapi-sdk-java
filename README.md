@@ -18,7 +18,7 @@ qcloudapi-sdk-java是为了让Java开发者能够在自己的代码里更快捷�
 
 #### 例子
 #### DescribeInstances 接口
-public class Demo {
+	public class Demo {
 	public static void main(String[] args) {
 		/* 如果是循环调用下面举例的接口，需要从此处开始你的循环语句。切记！ */
 		TreeMap<String, Object> config = new TreeMap<String, Object>();
