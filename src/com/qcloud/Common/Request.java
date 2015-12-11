@@ -30,6 +30,7 @@ public class Request {
 	protected static String requestUrl = "";
 	protected static String rawResponse = "";
 	protected static String version = "SDK_JAVA_1.2";
+	protected static int timeOut = 100;//设置连接主机的超时时间，单位：毫秒，可以根据实际需求合理更改 timeOut 的值。
 
 	public static String getRequestUrl() {
 		return requestUrl;
@@ -165,6 +166,8 @@ public class Request {
 			connection.setRequestProperty("connection", "Keep-Alive");
 			connection.setRequestProperty("user-agent",
 					"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
+			// 设置链接主机超时时间
+			connection.setConnectTimeout(timeOut);
 
 			if (requestMethod.equals("POST")) {
 				((HttpURLConnection) connection).setRequestMethod("POST");
@@ -300,6 +303,8 @@ public class Request {
 					"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
 			connection.setDoOutput(true);
 			connection.setDoInput(true);
+			// 设置链接主机超时时间
+			connection.setConnectTimeout(timeOut);
 
 			File file = new File(fileName);
 			long file_length = (Long) requestParams.get("fileSize");
