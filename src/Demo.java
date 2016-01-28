@@ -32,7 +32,7 @@ public class Demo {
 		params.put("offset", 0);
 		params.put("limit", 3);
 		
-		/* generateUrl 注意，方法生成请求串，发送请求。在正式请求中，可以删除下面这行代码,不然会造成鉴权失败。 */
+		/* generateUrl 注意，方法生成请求串，发送请求。在正式请求中，需要删除下面这行代码,不然会造成鉴权失败。 */
 		// System.out.println(module.generateUrl("DescribeInstances", params));
 		String result = null;
 		try {
