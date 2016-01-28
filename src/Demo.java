@@ -32,8 +32,8 @@ public class Demo {
 		params.put("offset", 0);
 		params.put("limit", 3);
 		
-		/* generateUrl 注意，方法生成请求串，发送请求。在正式请求中，需要删除下面这行代码,不然会造成鉴权失败。 */
-		// System.out.println(module.generateUrl("DescribeInstances", params));
+		/* generateUrl方法生成请求串,可用于调试使用 */
+		//System.out.println(module.generateUrl("DescribeInstances", params));
 		String result = null;
 		try {
 			/* call 方法正式向指定的接口名发送请求，并把请求参数params传入，返回即是接口的请求结果。 */

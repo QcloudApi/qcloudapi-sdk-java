@@ -92,6 +92,7 @@ public class Request {
 			params.put("Timestamp", System.currentTimeMillis() / 1000);
 
 		params.put("RequestClient", version);
+		params.remove("Signature");
 		String plainText = Sign.makeSignPlainText(params, requestMethod,
 				requestHost, requestPath);
 		try {
