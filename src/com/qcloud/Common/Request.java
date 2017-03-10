@@ -57,9 +57,15 @@ public class Request {
 
 		String plainText = Sign.makeSignPlainText(params, requestMethod,
 				requestHost, requestPath);
+		
+		String signatureMethod = "HmacSHA1";
+		if(params.containsKey("SignatureMethod") && params.get("SignatureMethod").toString().equals("HmacSHA256"))
+		{
+			signatureMethod = "HmacSHA256";
+		}
 
 		try {
-			params.put("Signature", Sign.sign(plainText, secretKey));
+			params.put("Signature", Sign.sign(plainText, secretKey, signatureMethod));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -95,8 +101,15 @@ public class Request {
 		params.remove("Signature");
 		String plainText = Sign.makeSignPlainText(params, requestMethod,
 				requestHost, requestPath);
+		
+		String signatureMethod = "HmacSHA1";
+		if(params.containsKey("SignatureMethod") && params.get("SignatureMethod").toString().equals("HmacSHA256"))
+		{
+			signatureMethod = "HmacSHA256";
+		}
+		
 		try {
-			params.put("Signature", Sign.sign(plainText, secretKey));
+			params.put("Signature", Sign.sign(plainText, secretKey, signatureMethod));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
