@@ -31,6 +31,8 @@ public class Demo {
 		/* DescribeInstances 接口的部分可选参数如下 */
 		params.put("offset", 0);
 		params.put("limit", 3);
+		/*在这里指定所要用的签名算法，不指定默认为HmacSHA1*/
+		//params.put("SignatureMethod", "HmacSHA256");
 		
 		/* generateUrl方法生成请求串,可用于调试使用 */
 		//System.out.println(module.generateUrl("DescribeInstances", params));
