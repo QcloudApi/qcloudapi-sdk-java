@@ -33,20 +33,26 @@ public class Sign {
     public static String sign(String signStr, String secret) 
     		throws NoSuchAlgorithmException, UnsupportedEncodingException, InvalidKeyException 
     {
-
-        String sig = null;
-        Mac mac = Mac.getInstance(HMAC_ALGORITHM);
-        SecretKeySpec secretKey = new SecretKeySpec(secret.getBytes(CONTENT_CHARSET), mac.getAlgorithm());
-
-        mac.init(secretKey);
-        byte[] hash = mac.doFinal(signStr.getBytes(CONTENT_CHARSET));
+	String sig = null;
+        Mac mac1 = Mac.getInstance("HmacSHA1");
+        Mac mac2 = Mac.getInstance("HmacSHA256");
+        byte[] hash;
+        if (signatureMethod == "HmacSHA256"){
+        	SecretKeySpec secretKey = new SecretKeySpec(secret.getBytes(CONTENT_CHARSET), mac2.getAlgorithm());
+        	mac2.init(secretKey);
+        	 hash = mac2.doFinal(signStr.getBytes(CONTENT_CHARSET));
+        }
+        else{
+        	SecretKeySpec secretKey = new SecretKeySpec(secret.getBytes(CONTENT_CHARSET), mac1.getAlgorithm());
+        	mac1.init(secretKey);
+        	 hash = mac1.doFinal(signStr.getBytes(CONTENT_CHARSET));
+        }
 
         // base64
         //sig = new String(new BASE64Encoder().encode(hash).getBytes());
         //sig = new String(Base64.encodeBase64(hash));
         sig = new String(Base64.encode(hash));
-
-        return sig;
+        return sig;	
     }
     
     public static String makeSignPlainText(TreeMap<String, Object> requestParams, String requestMethod, String requestHost, String requestPath) {
