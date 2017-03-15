@@ -30,7 +30,7 @@ public class Sign {
      *
      * @return
      */
-    public static String sign(String signStr, String secret) 
+    public static String sign(String signStr, String secret, String signatureMethod) 
     		throws NoSuchAlgorithmException, UnsupportedEncodingException, InvalidKeyException 
     {
 	String sig = null;
