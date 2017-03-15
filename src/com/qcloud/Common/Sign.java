@@ -22,11 +22,12 @@ public class Sign {
 
     /**
      * @brief 签名
-     * @author gavinyao@tencent.com
-     * @date 2014-08-13 21:07:27
+     * @author cicerochen@tencent.com
+     * @date 2017-03-15 18:00:00
      *
      * @param signStr 被加密串
      * @param secret 加密密钥
+     * @param signatureMethod 签名算法
      *
      * @return
      */
