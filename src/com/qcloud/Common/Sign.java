@@ -38,7 +38,7 @@ public class Sign {
         Mac mac1 = Mac.getInstance("HmacSHA1");
         Mac mac2 = Mac.getInstance("HmacSHA256");
         byte[] hash;
-        if (signatureMethod == "HmacSHA256"){
+        if (signatureMethod.equals("HmacSHA256")){
         	SecretKeySpec secretKey = new SecretKeySpec(secret.getBytes(CONTENT_CHARSET), mac2.getAlgorithm());
         	mac2.init(secretKey);
         	 hash = mac2.doFinal(signStr.getBytes(CONTENT_CHARSET));
