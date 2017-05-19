@@ -11,6 +11,7 @@ public abstract class Base {
 	protected String secretKey = "";
 	protected String defaultRegion = "";
 	protected String requestMethod = "GET";
+	protected String defaultVersion = "2017-03-12";
 
 	public void setConfig(TreeMap<String, Object> config) {
 		if (config == null)
@@ -69,6 +70,9 @@ public abstract class Base {
 		if (!params.containsKey("Region")) {
 			params.put("Region", defaultRegion);
 		}
+		if (!params.containsKey("Version")) {
+			params.put("Version", defaultVersion);
+		}
 		return Request.generateUrl(params, secretId, secretKey, requestMethod,
 				serverHost, serverUri);
 	}
@@ -84,6 +88,9 @@ public abstract class Base {
 		params.put("Action", actionName);
 		if (!params.containsKey("Region")) {
 			params.put("Region", defaultRegion);
+		}
+		if (!params.containsKey("Version")) {
+			params.put("Version", defaultVersion);
 		}
 		String response = Request.send(params, secretId, secretKey, requestMethod, serverHost, serverUri, fileName);
 		return response;
