@@ -3,7 +3,11 @@
 qcloudapi-sdk-java是为了让Java开发者能够在自己的代码里更快捷方便的使用腾讯云的API而开发的SDK工具包。
 
 #### 更新
-[3/10] 增加HmacSHA256签名算法的兼容
+[5/19] 设置接口默认Version：
+Cvm模块新版本API已经上线，通过是否传Version区分新旧版本。SDK默认调用新接口，因此需要增加Version的默认设置。
+CvmAPI接口介绍见：https://www.qcloud.com/document/api/213/569
+
+[3/10] 增加HmacSHA256签名算法的兼容。
 
 [7/15] 增加Tdsql模块。
 
