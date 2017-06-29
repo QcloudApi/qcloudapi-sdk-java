@@ -165,11 +165,11 @@ public class Request {
 				HttpsURLConnection httpsConn = (HttpsURLConnection) realUrl
 						.openConnection();
 
-				httpsConn.setHostnameVerifier(new HostnameVerifier() {
+				/*httpsConn.setHostnameVerifier(new HostnameVerifier() {
 					public boolean verify(String hostname, SSLSession session) {
 						return true;
 					}
-				});
+				});*/
 				connection = httpsConn;
 			} else {
 				connection = realUrl.openConnection();
