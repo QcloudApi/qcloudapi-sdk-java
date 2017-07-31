@@ -4,6 +4,8 @@ qcloudapi-sdk-java是为了让Java开发者能够在自己的代码里更快捷�
 
 #### 更新
 
+[2017/7/12] 增加Bm和Bmlb模块
+
 [2017/7/12] 回滚：不默认传Version参数
 
 [2017/6.29] https请求支持SNI特性：访问api的域名放入server_name扩展字段中。
