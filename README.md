@@ -4,6 +4,8 @@ qcloudapi-sdk-java是为了让Java开发者能够在自己的代码里更快捷�
 
 #### 更新
 
+[2017/8/7] 增加Feecenter模块
+
 [2017/7/31] 增加Bm和Bmlb模块
 
 [2017/7/12] 回滚：不默认传Version参数
