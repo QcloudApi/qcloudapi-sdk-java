@@ -4,6 +4,8 @@ qcloudapi-sdk-java是为了让Java开发者能够在自己的代码里更快捷�
 
 #### 更新
 
+[2017/9/11] 增加Bmeip和Bmvpc模块
+
 [2017/8/7] 增加Feecenter模块
 
 [2017/7/31] 增加Bm和Bmlb模块
