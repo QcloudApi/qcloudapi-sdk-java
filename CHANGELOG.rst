@@ -5,6 +5,7 @@ CHANGELOG
 latest (now)
 ============
 
+* add cloudaudit module
 * add batch module
 
 2.0.3 (2017-11-10)
