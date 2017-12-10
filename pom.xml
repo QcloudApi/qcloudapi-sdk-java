@@ -4,7 +4,7 @@
     <groupId>com.qcloud</groupId>
     <artifactId>qcloud-java-sdk</artifactId>
     <packaging>jar</packaging>
-    <version>2.0.3</version>
+    <version>2.0.4</version>
     <name>qcloud-java-sdk</name>
     <url>http://www.qcloud.com</url>
     <description>Tencent Cloud Open API SDK for Java

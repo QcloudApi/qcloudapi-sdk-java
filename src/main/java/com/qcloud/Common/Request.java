@@ -29,7 +29,7 @@ import com.qcloud.Utilities.MD5;
 public class Request {
 	protected static String requestUrl = "";
 	protected static String rawResponse = "";
-	protected static String version = "SDK_JAVA_2.0.3";
+	protected static String version = "SDK_JAVA_2.0.4";
 	protected static int timeOut = 1000;//设置连接主机的超时时间，单位：毫秒，可以根据实际需求合理更改 timeOut 的值。
 
 	public static String getRequestUrl() {
