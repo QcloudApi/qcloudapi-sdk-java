@@ -5,6 +5,7 @@ CHANGELOG
 latest (now)
 ============
 
+* add scf module
 * add dfw module
 * add cloudaudit module
 * add batch module
