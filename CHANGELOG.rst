@@ -5,6 +5,7 @@ CHANGELOG
 latest (now)
 ============
 
+* add tmt module
 * add apigateway module
 * add scf module
 * add dfw module
