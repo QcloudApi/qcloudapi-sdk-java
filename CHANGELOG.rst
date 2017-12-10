@@ -5,6 +5,7 @@ CHANGELOG
 latest (now)
 ============
 
+* add apigateway module
 * add scf module
 * add dfw module
 * add cloudaudit module
