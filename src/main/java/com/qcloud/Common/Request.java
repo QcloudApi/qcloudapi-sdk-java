@@ -141,7 +141,7 @@ public class Request {
 						+ URLEncoder.encode(requestParams.get(key).toString(),"utf-8");
 			} catch (UnsupportedEncodingException e) {
 				result = "{\"code\":-2300,\"location\":\"com.qcloud.Common.Request:129\",\"message\":\"api sdk throw exception! "
-						+ e.toString() + "\"}";
+						+ e.toString().replace("\"", "\\\"") + "\"}";
 			}
 		}
 
@@ -245,7 +245,7 @@ public class Request {
 
 		} catch (Exception e) {
 			result = "{\"code\":-2700,\"location\":\"com.qcloud.Common.Request:225\",\"message\":\"api sdk throw exception! "
-					+ e.toString() + "\"}";
+					+ e.toString().replace("\"", "\\\"") + "\"}";
 		} finally {
 			// 使用finally块来关闭输入流
 			try {
@@ -254,7 +254,7 @@ public class Request {
 				}
 			} catch (Exception e2) {
 				result = "{\"code\":-2800,\"location\":\"com.qcloud.Common.Request:234\",\"message\":\"api sdk throw exception! "
-						+ e2.toString() + "\"}";
+						+ e2.toString().replace("\"", "\\\"") + "\"}";
 			}
 		}
 		rawResponse = result;
@@ -277,7 +277,7 @@ public class Request {
 						+ URLEncoder.encode(requestParams.get(key).toString(),"utf-8");
 			} catch (UnsupportedEncodingException e) {
 				result = "{\"code\":-2400,\"location\":\"com.qcloud.Common.Request:263\",\"message\":\"api sdk throw exception! "
-						+ e.toString() + "\"}";
+						+ e.toString().replace("\"", "\\\"") + "\"}";
 			}
 		}
 
@@ -357,7 +357,7 @@ public class Request {
 						connection.getInputStream()));
 			} catch (Exception e) {
 				result = "{\"code\":-3002,\"location\":\"com.qcloud.Common.Request:331\",\"message\":\"api sdk throw exception! protocol doesn't support input or the character Encoding is not supported."
-						+ "details: " + e.toString() + "\"}";
+						+ "details: " + e.toString().replace("\"", "\\\"") + "\"}";
 				if (in != null) {
 					in.close();
 				}
@@ -371,7 +371,7 @@ public class Request {
 
 		} catch (Exception e) {
 			result = "{\"code\":-3000,\"location\":\"com.qcloud.Common.Request:345\",\"message\":\"api sdk throw exception! "
-					+ e.toString() + "\"}";
+					+ e.toString().replace("\"", "\\\"") + "\"}";
 		} finally {
 			// 使用finally块来关闭输入流
 			try {
@@ -380,7 +380,7 @@ public class Request {
 				}
 			} catch (Exception e2) {
 				result = "{\"code\":-3003,\"location\":\"com.qcloud.Common.Request:354\",\"message\":\"api sdk throw exception! "
-						+ e2.toString() + "\"}";
+						+ e2.toString().replace("\"", "\\\"") + "\"}";
 			}
 		}
 		rawResponse = result;
