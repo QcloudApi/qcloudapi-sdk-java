@@ -75,8 +75,9 @@ public class Sign {
 
         String retStr = "";
         for(String key: requestParams.keySet()) {
+            String value = requestParams.get(key).toString();
         	//排除上传文件的参数
-            if("POST".equals(requestMethod) && requestParams.get(key).toString().substring(0, 1).equals("@")){
+            if("POST".equals(requestMethod) && (! value.isEmpty()) && value.substring(0, 1).equals("@")){
             	continue;
             }
             if (retStr.length()==0) {
@@ -84,7 +85,7 @@ public class Sign {
             } else {
                 retStr += '&';
             }
-            retStr += key.replace("_", ".") + '=' + requestParams.get(key).toString();
+            retStr += key.replace("_", ".") + '=' + value;
 
         }
         return retStr;
