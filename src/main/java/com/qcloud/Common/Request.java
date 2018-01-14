@@ -16,9 +16,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.TreeMap;
 
-import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLSession;
 
 import com.qcloud.Utilities.MD5;
 
@@ -70,12 +68,6 @@ public class Request {
 			e.printStackTrace();
 		}
 
-		if (params.get("Action").toString().equals("MultipartUploadVodFile")) {
-			String url = "http://" + requestHost + requestPath;
-			url += Sign.buildParamStr1(params,requestMethod);
-			return url;
-		}
-
 		String url = "https://" + requestHost + requestPath;
 		if (requestMethod.equals("GET")) {
 			url += Sign.buildParamStr1(params,requestMethod);
@@ -112,12 +104,6 @@ public class Request {
 			params.put("Signature", Sign.sign(plainText, secretKey, signatureMethod));
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-
-		if (params.get("Action").toString().equals("MultipartUploadVodFile")) {
-			String url = "http://" + requestHost + requestPath;
-			return sendMultipartUploadVodFileRequest(url, params,
-					requestMethod, fileName);
 		}
 
 		String url = "https://" + requestHost + requestPath;
@@ -254,132 +240,6 @@ public class Request {
 				}
 			} catch (Exception e2) {
 				result = "{\"code\":-2800,\"location\":\"com.qcloud.Common.Request:234\",\"message\":\"api sdk throw exception! "
-						+ e2.toString().replace("\"", "\\\"") + "\"}";
-			}
-		}
-		rawResponse = result;
-		return result;
-	}
-
-	public static String sendMultipartUploadVodFileRequest(String url,
-			Map<String, Object> requestParams, String requestMethod,
-			String fileName) {
-		String result = "";
-		BufferedReader in = null;
-		String paramStr = "";
-
-		for (String key : requestParams.keySet()) {
-			if (!paramStr.isEmpty()) {
-				paramStr += '&';
-			}
-			try {
-				paramStr += key + '='
-						+ URLEncoder.encode(requestParams.get(key).toString(),"utf-8");
-			} catch (UnsupportedEncodingException e) {
-				result = "{\"code\":-2400,\"location\":\"com.qcloud.Common.Request:263\",\"message\":\"api sdk throw exception! "
-						+ e.toString().replace("\"", "\\\"") + "\"}";
-			}
-		}
-
-		try {
-
-			if (url.indexOf('?') > 0) {
-				url += '&' + paramStr;
-			} else {
-				url += '?' + paramStr;
-			}
-
-			System.out.println(url);
-
-			requestUrl = url;
-			// String BOUNDARY = "---------------------------" +
-			// MD5.stringToMD5(String.valueOf(System.currentTimeMillis())).substring(0,15);
-			URL realUrl = new URL(url);
-			URLConnection connection = null;
-			if (url.toLowerCase().startsWith("https")) {
-				HttpsURLConnection httpsConn = (HttpsURLConnection) realUrl
-						.openConnection();
-
-				httpsConn.setHostnameVerifier(new HostnameVerifier() {
-					public boolean verify(String hostname, SSLSession session) {
-						return true;
-					}
-				});
-				connection = httpsConn;
-			} else {
-				connection = realUrl.openConnection();
-			}
-
-			// 设置通用的请求属性
-			connection.setRequestProperty("accept", "*/*");
-			connection.setRequestProperty("connection", "Keep-Alive");
-			connection.setRequestProperty("user-agent",
-					"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
-			connection.setDoOutput(true);
-			connection.setDoInput(true);
-			// 设置链接主机超时时间
-			connection.setConnectTimeout(timeOut);
-
-			File file = new File(fileName);
-			long file_length = (Long) requestParams.get("fileSize");
-			OutputStream out = new DataOutputStream(
-					connection.getOutputStream());
-			DataInputStream ins = new DataInputStream(new FileInputStream(file));
-			int offset = ((Integer) requestParams.get("offset")).intValue();
-			int dataSize = ((Integer) requestParams.get("dataSize")).intValue();
-			if (offset >= file_length) {
-				return "{\"code\":-3001,\"location\":\"com.qcloud.Common.Request:303\",\"message\":\"api sdk throw exception! offset larger than the size of file\"}";
-			}
-			int skipBytes = ins.skipBytes(offset);
-			int page = dataSize / 1024;
-			int remainder = dataSize % 1024;
-			int bytes = 0;
-			byte[] bufferOut = new byte[1024];
-			byte[] bufferOut2 = new byte[remainder];
-			while (page != 0) {
-				if ((bytes = ins.read(bufferOut)) != -1) {
-					out.write(bufferOut, 0, bytes);
-				}
-				page = page - 1;
-			}
-			if ((bytes = ins.read(bufferOut2)) != -1) {
-				out.write(bufferOut2, 0, bytes);
-			}
-			ins.close();
-			out.flush();
-			out.close();
-
-			// 建立实际的连接
-			connection.connect();
-			try {
-				// 定义 BufferedReader输入流来读取URL的响应
-				in = new BufferedReader(new InputStreamReader(
-						connection.getInputStream()));
-			} catch (Exception e) {
-				result = "{\"code\":-3002,\"location\":\"com.qcloud.Common.Request:331\",\"message\":\"api sdk throw exception! protocol doesn't support input or the character Encoding is not supported."
-						+ "details: " + e.toString().replace("\"", "\\\"") + "\"}";
-				if (in != null) {
-					in.close();
-				}
-				rawResponse = result;
-				return result;
-			}
-			String line;
-			while ((line = in.readLine()) != null) {
-				result += line;
-			}
-
-		} catch (Exception e) {
-			result = "{\"code\":-3000,\"location\":\"com.qcloud.Common.Request:345\",\"message\":\"api sdk throw exception! "
-					+ e.toString().replace("\"", "\\\"") + "\"}";
-		} finally {
-			// 使用finally块来关闭输入流
-			try {
-				if (in != null) {
-					in.close();
-				}
-			} catch (Exception e2) {
-				result = "{\"code\":-3003,\"location\":\"com.qcloud.Common.Request:354\",\"message\":\"api sdk throw exception! "
 						+ e2.toString().replace("\"", "\\\"") + "\"}";
 			}
 		}
