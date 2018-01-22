@@ -5,7 +5,11 @@ CHANGELOG
 latest (now)
 ============
 
+2.0.5 (2017-01-22)
+==================
+
 * add partners module
+* increase connect timeout (5s) and add read timeout (90s)
 
 2.0.4 (2017-12-10)
 ==================
