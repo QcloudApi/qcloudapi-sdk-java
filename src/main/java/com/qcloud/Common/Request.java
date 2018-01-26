@@ -118,6 +118,7 @@ public class Request {
 		String result = "";
 		BufferedReader in = null;
 		String paramStr = "";
+		final String methodName = Thread.currentThread().getStackTrace()[1].getMethodName();
 
 		for (String key : requestParams.keySet()) {
 			if (!paramStr.isEmpty()) {
@@ -127,7 +128,8 @@ public class Request {
 				paramStr += key + '='
 						+ URLEncoder.encode(requestParams.get(key).toString(),"utf-8");
 			} catch (UnsupportedEncodingException e) {
-				result = "{\"code\":-2300,\"location\":\"com.qcloud.Common.Request:129\",\"message\":\"api sdk throw exception! "
+				String location = getExceptionLocationOfMethod(methodName, e);
+				result = "{\"code\":-2300,\"location\":\"" + location + "\",\"message\":\"api sdk throw exception! "
 						+ e.toString().replace("\"", "\\\"") + "\"}";
 			}
 		}
@@ -232,7 +234,8 @@ public class Request {
 			}
 
 		} catch (Exception e) {
-			result = "{\"code\":-2700,\"location\":\"com.qcloud.Common.Request:225\",\"message\":\"api sdk throw exception! "
+			String location = getExceptionLocationOfMethod(methodName, e);
+			result = "{\"code\":-2700,\"location\":\"" + location + "\",\"message\":\"api sdk throw exception! "
 					+ e.toString().replace("\"", "\\\"") + "\"}";
 		} finally {
 			// 使用finally块来关闭输入流
@@ -241,11 +244,28 @@ public class Request {
 					in.close();
 				}
 			} catch (Exception e2) {
-				result = "{\"code\":-2800,\"location\":\"com.qcloud.Common.Request:234\",\"message\":\"api sdk throw exception! "
+				String location = getExceptionLocationOfMethod(methodName, e2);
+				result = "{\"code\":-2800,\"location\":\"" + location + "\",\"message\":\"api sdk throw exception! "
 						+ e2.toString().replace("\"", "\\\"") + "\"}";
 			}
 		}
 		rawResponse = result;
 		return result;
+	}
+
+	private static String getExceptionLocationOfMethod(String name, Exception ex) {
+		String location = "";
+		if (name == null || name.trim().isEmpty() || ex == null) return location;  // garbage in, garbage out
+		final String className = Request.class.getName();
+		int lineNumber = 0;
+		StackTraceElement[] st = ex.getStackTrace();
+		for (StackTraceElement el : st) {
+			if (className.equals(el.getClassName()) && name.equals(el.getMethodName())) {
+				lineNumber = el.getLineNumber();
+				break;
+			}
+		}
+		location = className + ":" + lineNumber;
+		return location;
 	}
 }
