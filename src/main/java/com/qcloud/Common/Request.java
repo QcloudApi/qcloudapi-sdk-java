@@ -27,7 +27,7 @@ import com.qcloud.Utilities.MD5;
 public class Request {
 	protected static String requestUrl = "";
 	protected static String rawResponse = "";
-	protected static String version = "SDK_JAVA_2.0.5";
+	protected static String version = "SDK_JAVA_2.0.6";
 	protected static int connectTimeout = 5000; // ms
 	protected static int readTimeout = 90000; // ms
 
