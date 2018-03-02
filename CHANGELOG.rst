@@ -5,6 +5,8 @@ CHANGELOG
 latest (now)
 ============
 
+* add athena module
+
 2.0.5 (2017-01-22)
 ==================
 
