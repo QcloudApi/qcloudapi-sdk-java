@@ -5,6 +5,8 @@ CHANGELOG
 latest (now)
 ============
 
+* support dymanic module: now if module is not explicitly presented in src/main/java/com/qcloud/Module, such as the ckafka product, you can use Morphling module with the dynamic module name, it will work as it is.
+
 2.0.6 (2018-03-02)
 ==================
 
