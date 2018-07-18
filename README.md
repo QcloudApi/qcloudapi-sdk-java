@@ -2,30 +2,33 @@
 
 qcloudapi-sdk-java是为了让Java开发者能够在自己的代码里更快捷方便的使用腾讯云的API而开发的SDK工具包。
 
-#### 资源
+## 资源
 
 * [公共参数](http://wiki.qcloud.com/wiki/%E5%85%AC%E5%85%B1%E5%8F%82%E6%95%B0)
 * [API列表](http://wiki.qcloud.com/wiki/API)
 * [错误码](http://wiki.qcloud.com/wiki/%E9%94%99%E8%AF%AF%E7%A0%81)
 
-#### 入门
+## 入门
 
 1. 申请安全凭证。
 在第一次使用云API之前，用户首先需要在腾讯云网站上申请安全凭证，安全凭证包括 SecretId 和 SecretKey, SecretId 是用于标识 API 调用者的身份，SecretKey是用于加密签名字符串和服务器端验证签名字符串的密钥。SecretKey 必须严格保管，避免泄露。
 
 2. 下载SDK，放入到您的程序目录。或使用Maven。
 3. SDK Maven使用示例，所有SDK版本可查看[此链接](https://mvnrepository.com/artifact/com.qcloud/qcloud-java-sdk)。
+
 ```
 <dependency>
-<groupId>com.qcloud</groupId>
-<artifactId>qcloud-java-sdk</artifactId>
-<version>2.0.6</version>
+  <groupId>com.qcloud</groupId>
+  <artifactId>qcloud-java-sdk</artifactId>
+  <version>2.0.6</version>
 </dependency>
 ```
 使用方法请参考下面的例子。
 
-#### 例子
-#### DescribeInstances 接口
+## 例子
+
+### DescribeInstances 接口
+
 	public class Demo {
 	public static void main(String[] args) {
 		/* 如果是循环调用下面举例的接口，需要从此处开始你的循环语句。切记！ */
@@ -68,3 +71,23 @@ qcloudapi-sdk-java是为了让Java开发者能够在自己的代码里更快捷�
 
 	}
 }
+
+## 动态模块
+
+以前SDK需要把每一个产品都建一个类文件，指定域名，这虽然加强了合法性检查，但是新产品上线后，可能没有同步到SDK，造成开发者使用不便。
+2.0.7及更高的版本支持动态模块，你可以直接按模块名初始化，例如：
+
+```
+import com.qcloud.Module.Morphling;
+
+...
+
+        // ckafka并未有定义文件，但你仍然可以通过Morphling这个类来指定初始化
+        Morphling morphling = new Morphling("ckafka");
+        QcloudApiModuleCenter module = new QcloudApiModuleCenter(morphling, config);
+        String action = "ListInstance";
+
+...
+```
+
+这里ckafka并未有对应的类文件，但是仍然可以初始化成功并执行接下来的接口调用。注意，代码中实际上是把模块名拼接API的根域名进行调用的，而极个别的产品其模块名和域名不对应，典型的如cmq的域名首部是带地域信息的，此时模块名应该遵从域名首部。
