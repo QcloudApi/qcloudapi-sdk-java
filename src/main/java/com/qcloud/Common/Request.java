@@ -21,7 +21,7 @@ import javax.net.ssl.HttpsURLConnection;
 import com.qcloud.Utilities.MD5;
 
 /**
- * @brief 请求调用类
+ * 请求调用类
  * @author robinslsun
  */
 public class Request {
@@ -56,7 +56,7 @@ public class Request {
 
 		String plainText = Sign.makeSignPlainText(params, requestMethod,
 				requestHost, requestPath);
-		
+
 		String signatureMethod = "HmacSHA1";
 		if(params.containsKey("SignatureMethod") && params.get("SignatureMethod").toString().equals("HmacSHA256"))
 		{
@@ -69,12 +69,28 @@ public class Request {
 			e.printStackTrace();
 		}
 
-		String url = "https://" + requestHost + requestPath;
+		StringBuilder url = new StringBuilder("https://");
+		url.append(requestHost).append(requestPath).append("?");
 		if (requestMethod.equals("GET")) {
-			url += Sign.buildParamStr1(params,requestMethod);
+            for ( String k : params.keySet() ) {
+                try {
+                    url.append(k.replace("_", "."))
+                       .append("=")
+                       .append(URLEncoder.encode(params.get(k).toString(), "utf-8"))
+                       .append("&");
+                } catch (UnsupportedEncodingException e) {
+                    // 下面是一个错误的做法。
+                    // 本应该抛出异常让上层捕获处理，但是出于保持兼容性的考虑，
+                    // 并不想让这个方法升级后抛出一个未捕获的异常。
+                    // 而且之所以会有这个异常，是因为有些特殊系统未必支持utf-8，
+                    // 在这些系统上，其实根本无法正常调用云API，
+                    // 所以可以直接忽略，返回一个无用的信息即可。
+                    return "https://" + requestHost + requestPath;
+                }
+            }
 		}
 
-		return url;
+		return url.toString().substring(0, url.length() - 1);
 	}
 
 	public static String send(TreeMap<String, Object> params, String secretId,
@@ -94,13 +110,13 @@ public class Request {
 		params.remove("Signature");
 		String plainText = Sign.makeSignPlainText(params, requestMethod,
 				requestHost, requestPath);
-		
+
 		String signatureMethod = "HmacSHA1";
 		if(params.containsKey("SignatureMethod") && params.get("SignatureMethod").toString().equals("HmacSHA256"))
 		{
 			signatureMethod = "HmacSHA256";
 		}
-		
+
 		try {
 			params.put("Signature", Sign.sign(plainText, secretKey, signatureMethod));
 		} catch (Exception e) {

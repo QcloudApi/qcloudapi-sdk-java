@@ -8,10 +8,7 @@ import java.util.TreeMap;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
-//import sun.misc.BASE64Encoder;
-//import org.apache.commons.codec.binary.Base64;
 import com.qcloud.Utilities.Base64;
-import com.sun.corba.se.impl.protocol.giopmsgheaders.RequestMessage;
 
 public class Sign {
 	// 编码方式
@@ -21,15 +18,14 @@ public class Sign {
     private static final String HMAC_ALGORITHM = "HmacSHA1";
 
     /**
-     * @brief 签名
+     * 签名
      * @author cicerochen@tencent.com
-     * @date 2017-03-15 18:00:00
      *
      * @param signStr 被加密串
      * @param secret 加密密钥
      * @param signatureMethod 签名算法
      *
-     * @return
+     * @return 签名结果
      */
     public static String sign(String signStr, String secret, String signatureMethod) 
     		throws NoSuchAlgorithmException, UnsupportedEncodingException, InvalidKeyException 
@@ -49,26 +45,18 @@ public class Sign {
         	 hash = mac1.doFinal(signStr.getBytes(CONTENT_CHARSET));
         }
 
-        // base64
-        //sig = new String(new BASE64Encoder().encode(hash).getBytes());
-        //sig = new String(Base64.encodeBase64(hash));
         sig = new String(Base64.encode(hash));
-        return sig;	
+        return sig;
     }
-    
+
     public static String makeSignPlainText(TreeMap<String, Object> requestParams, String requestMethod, String requestHost, String requestPath) {
 
         String retStr = "";
         retStr += requestMethod;
         retStr += requestHost;
         retStr += requestPath;
-        retStr += buildParamStr1(requestParams, requestMethod);
-        
+        retStr += buildParamStr(requestParams, requestMethod);
         return retStr;
-    }
-
-    protected static String buildParamStr1(TreeMap<String, Object> requestParams, String requestMethod) {
-        return buildParamStr(requestParams, requestMethod);
     }
 
     protected static String buildParamStr(TreeMap<String, Object> requestParams, String requestMethod) {

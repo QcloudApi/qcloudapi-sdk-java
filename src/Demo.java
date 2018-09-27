@@ -2,7 +2,6 @@ import java.util.TreeMap;
 
 import com.qcloud.QcloudApiModuleCenter;
 import com.qcloud.Module.Cvm;
-import com.qcloud.Utilities.Json.JSONObject;
 
 public class Demo {
 	public static void main(String[] args) {
@@ -40,8 +39,7 @@ public class Demo {
 		try {
 			/* call 方法正式向指定的接口名发送请求，并把请求参数params传入，返回即是接口的请求结果。 */
 			result = module.call("DescribeInstances", params);
-			JSONObject json_result = new JSONObject(result);
-			System.out.println(json_result);
+			System.out.println(result);
 		} catch (Exception e) {
 			System.out.println("error..." + e.getMessage());
 		}

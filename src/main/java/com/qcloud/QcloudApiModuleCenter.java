@@ -6,14 +6,14 @@ import java.util.TreeMap;
 import com.qcloud.Module.Base;
 
 /**
- * @brief 模块调用类
+ * 模块调用类
  * @author robinslsun
  *
  */
 public class QcloudApiModuleCenter {
 
 	private Base module;
-	
+
 	/**
 	 * 构造模块调用类
 	 * @param module 实际模块实例
@@ -23,9 +23,10 @@ public class QcloudApiModuleCenter {
 		this.module = module;
 		this.module.setConfig(config);
 	}
-	
+
 	/**
-	 * 生成Api调用地址
+	 * 生成Api调用地址。
+     * 仅支持GET方法，POST方法仅返回host+path信息，不支持utf8编码的机器上仅返回host+path信息。
 	 * @param actionName 模块动作名称
 	 * @param params 模块请求参数
 	 * @return Api调用地址
@@ -33,7 +34,7 @@ public class QcloudApiModuleCenter {
 	public String generateUrl(String actionName, TreeMap<String, Object> params){
 		return module.generateUrl(actionName, params);
 	}
-	
+
 	/**
 	 * Api调用
 	 * @param actionName 模块动作名称
@@ -49,12 +50,12 @@ public class QcloudApiModuleCenter {
 					return (String) method.invoke(module, params);
 				} catch (Exception e) {
 					throw e;
-				} 
+				}
 			}
 		}
 		return module.call(actionName, params);
 	}
-	
+
 	public void setConfigSecretId(String secretId) {
 		module.setConfigSecretId(secretId);
 	}

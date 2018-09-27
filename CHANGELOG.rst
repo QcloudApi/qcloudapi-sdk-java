@@ -5,6 +5,8 @@ CHANGELOG
 latest (now)
 ============
 
+* modify generateUrl(): previously the url just used for debug, now we use urlencode to make the generated url available to be requested directly, for get method only. Please note that due to Tencent cloud API's limit, the signature will be expired in 5 minutes.
+
 2.0.7 (2018-07-18)
 ==================
 

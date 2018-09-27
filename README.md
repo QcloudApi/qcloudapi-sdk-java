@@ -50,19 +50,21 @@ qcloudapi-sdk-java是为了让Java开发者能够在自己的代码里更快捷�
 		 */
 		QcloudApiModuleCenter module = new QcloudApiModuleCenter(new Cvm(),config);
 		TreeMap<String, Object> params = new TreeMap<String, Object>();
-		/* 将需要输入的参数都放入 params 里面，必选参数是必填的。 */
-		/* DescribeInstances 接口的部分可选参数如下 */
+		// 将需要输入的参数都放入 params 里面，必选参数是必填的。
+		// DescribeInstances 接口的部分可选参数如下
 		params.put("offset", 0);
 		params.put("limit", 3);
-		/*在这里指定所要用的签名算法，不指定默认为HmacSHA1*/
-		//params.put("SignatureMethod", "HmacSHA256");
-		/* generateUrl 方法生成请求串，但不发送请求。在正式请求中，可以删除下面这行代码。 */
+		// 在这里指定所要用的签名算法，不指定默认为HmacSHA1
+		// params.put("SignatureMethod", "HmacSHA256");
+		// generateUrl 方法生成请求串，但不发送请求。在正式请求中，可以删除下面这行代码。
+        // 如果是POST方法，或者系统不支持UTF8编码，则仅会打印host+path信息。
 		// System.out.println(module.generateUrl("DescribeInstances", params));
 
 		String result = null;
 		try {
-			/* call 方法正式向指定的接口名发送请求，并把请求参数params传入，返回即是接口的请求结果。 */
+			// call 方法正式向指定的接口名发送请求，并把请求参数params传入，返回即是接口的请求结果。
 			result = module.call("DescribeInstances", params);
+            // 可以对返回的字符串进行json解析，您可以使用其他的json包进行解析，此处仅为示例
 			JSONObject json_result = new JSONObject(result);
 			System.out.println(json_result);
 		} catch (Exception e) {

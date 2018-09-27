@@ -55,7 +55,7 @@ public abstract class Base {
 	public String getLastResponse() {
 		return Request.getRawResponse();
 	}
-	
+
 	private String ucFirst(String word){
 		return word.replaceFirst(word.substring(0, 1),
 				word.substring(0, 1).toUpperCase());
@@ -72,11 +72,11 @@ public abstract class Base {
 		return Request.generateUrl(params, secretId, secretKey, requestMethod,
 				serverHost, serverUri);
 	}
-	
+
 	public String call(String actionName, TreeMap<String, Object> params){
 		return call(actionName, params, null);
 	}
-	
+
 	public String call(String actionName, TreeMap<String, Object> params, String fileName){
 		actionName = ucFirst(actionName);
 		if(params == null)
