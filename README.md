@@ -37,7 +37,7 @@ qcloudapi-sdk-java是为了让Java开发者能够在自己的代码里更快捷�
 		config.put("SecretKey", "你的secretKey");
 		/* 请求方法类型 POST、GET */
 		config.put("RequestMethod", "GET");
-		/* 区域参数，可选: gz:广州; sh:上海; hk:香港; ca:北美;等。 */
+		/* 区域参数，可选: gz:广州; sh:上海; hk:中国香港; ca:北美;等。 */
 		config.put("DefaultRegion", "gz");
 
 		/*
